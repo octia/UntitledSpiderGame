@@ -4,12 +4,16 @@ using UnityEngine.InputSystem;
 
 public class FloorRayGun : MonoBehaviour
 {
+    public static FloorRayGun Instance = null;
     [HideInInspector]
     public UnityEvent<Vector3> RightClickedGround;
 
-    public static FloorRayGun Instance = null;
+    [SerializeField]
+    private LayerMask _layerMask;
+    
     private Ray ray;
     
+
     [SerializeField]
     private InputAction _mouseClick;
 
@@ -34,20 +38,17 @@ public class FloorRayGun : MonoBehaviour
         Gizmos.DrawLine(ray.origin, ray.origin + ray.direction * 999f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_mouseClick.WasPerformedThisFrame())
         {
-            Debug.Log("right click");
 
             float mouseX = Mouse.current.position.x.ReadValue();
             float mouseY = Mouse.current.position.y.ReadValue();
             ray = GetComponent<Camera>().ScreenPointToRay(new Vector3(mouseX, mouseY, 0f));
-            var rayHit = Physics.Raycast(ray, out var raycastHit, 999);
+            var rayHit = Physics.Raycast(ray, out var raycastHit, 999f, _layerMask);
             if (rayHit)
             {
-                Debug.Log("Ray hit");
                 RightClickedGround.Invoke(raycastHit.point);
             }
         }

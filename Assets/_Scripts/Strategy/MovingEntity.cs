@@ -1,12 +1,16 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class MovingEntity : MonoBehaviour
 {
+
     [SerializeField]
-    private Rigidbody _rigidbody;
+    private NavMeshAgent _agent;
+    
+    [SerializeField]
     private float _speed = 2f;
-    private static Vector3 offset = Vector3.up;
     
     private void OnEnable()
     {
@@ -15,9 +19,9 @@ public class MovingEntity : MonoBehaviour
 
     public void MoveToCoordinates(Vector3 newPos)
     {
-        Debug.Log("Moving");
-        var currPos = transform.position;
-        transform.DOMove(newPos + offset, Vector3.Distance(newPos, currPos) / _speed);
+        _agent.SetDestination(newPos);
+        //var currPos = transform.position;
+        //transform.DOMove(newPos, Vector3.Distance(newPos, currPos) / _speed);
     }
 
     private void OnDisable()
