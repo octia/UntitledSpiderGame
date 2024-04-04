@@ -6,7 +6,7 @@ public class FloorRayGun : MonoBehaviour
 {
     public static FloorRayGun Instance = null;
     [HideInInspector]
-    public UnityEvent<Vector3> RightClickedGround;
+    public UnityEvent<Vector3> RightClickedGround = new UnityEvent<Vector3>();
 
     [SerializeField]
     private LayerMask _layerMask;
