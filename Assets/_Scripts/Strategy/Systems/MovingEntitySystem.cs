@@ -2,14 +2,14 @@ using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 
-[BurstCompile]
+
 [UpdateAfter(typeof(InputCaptureSystem))]
 public partial struct MovingEntitySystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-
+        
     }
     
     public void OnUpdate(ref SystemState state)
@@ -17,12 +17,14 @@ public partial struct MovingEntitySystem : ISystem
         float dTime = SystemAPI.Time.DeltaTime;
         if (InputCaptureSystem.WasCommandIssued)
         {
+            float3 newTarget = InputCaptureSystem.TargetPosition;
             new SetTargetJob
             {
                 deltaTime = dTime,
-                destination = InputCaptureSystem.TargetPosition
+                destination = newTarget
             }.ScheduleParallel();
             InputCaptureSystem.WasCommandIssued = false;
+            InputCaptureSystem.PrintDebug("Issuing SetTargetJob to " + InputCaptureSystem.TargetPosition);
         }
 
         new NavMoveJob

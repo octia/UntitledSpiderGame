@@ -25,6 +25,11 @@ public partial class InputCaptureSystem : SystemBase
         _previousTargetPosition = float3.zero;
     }
 
+    public static void PrintDebug(string message)
+    {
+        Debug.Log(message);
+    }
+
     private void OnRightClickHappened(Vector3 position)
     {
         TargetPosition = position;
@@ -35,10 +40,14 @@ public partial class InputCaptureSystem : SystemBase
         {
             distanceSQ += distancesBetweenTargets[i] * distancesBetweenTargets[i];
         }
-        if (distanceSQ >= 1)
+        if (true)//distanceSQ >= 0.01f)
         {
             WasCommandIssued = true;
             _previousTargetPosition = TargetPosition;
+        }
+        else
+        {
+            Debug.Log("Ignoring input! ");
         }
     }
 

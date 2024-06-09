@@ -41,6 +41,7 @@ public partial struct EntitySpawnJob : IJobEntity
         {
             var newEntity = ecb.Instantiate(sortKey, spawnerAspect.GetEntityToSpawn());
             ecb.SetComponent(sortKey, newEntity, spawnerAspect.GetSpawnedEntityTransform());
+            ecb.SetName(sortKey, newEntity, "Entity " + sortKey  + " " + deltaTime);
         }
     }
 }

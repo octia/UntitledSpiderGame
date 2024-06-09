@@ -5,6 +5,8 @@ using UnityEngine;
 public class MovingEntityMono : MonoBehaviour
 {
     public Color RandomColor => UnityEngine.Random.ColorHSV();
+    [Range(0, 90f)]
+    public float Speed = 5f;
 }
 
 public class MovingEntityBaker : Baker<MovingEntityMono>
@@ -19,7 +21,10 @@ public class MovingEntityBaker : Baker<MovingEntityMono>
             color = authoring.RandomColor
         });
         AddComponent(movingEntity, new NavigatedEntityData{
-            target = float3.zero
+            target = float3.zero,
+            navigateToTarget = false,
+            speed = authoring.Speed
         });
+        
     }
 }

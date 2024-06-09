@@ -16,7 +16,7 @@ public class EntitySpawnerBaker : Baker<EntitySpawnerMono>
         {
             toSpawn = GetEntity(authoring.toSpawn, TransformUsageFlags.Dynamic),
             spawnDelay = authoring.spawnDelay,
-            timeLeft = authoring.spawnDelay
+            timeLeft = 1f
             
         });
     }

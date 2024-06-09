@@ -14,7 +14,7 @@ public class MovingEntity : MonoBehaviour
     
     private void OnEnable()
     {
-        FloorRayGun.Instance.RightClickedGround.AddListener(MoveToCoordinates);
+        //FloorRayGun.Instance.RightClickedGround.AddListener(MoveToCoordinates);
     }
 
     public void MoveToCoordinates(Vector3 newPos)
@@ -26,7 +26,7 @@ public class MovingEntity : MonoBehaviour
 
     private void OnDisable()
     {
-        FloorRayGun.Instance.RightClickedGround.RemoveListener(MoveToCoordinates);
+        //FloorRayGun.Instance.RightClickedGround.RemoveListener(MoveToCoordinates);
     }
 
 }
